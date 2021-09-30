@@ -13,6 +13,7 @@ const Home = () => {
           <li>Proving originality</li>
           <li>Verifiable status updates</li>
           <li>Preserving history</li>
+          <li>Giving and receiving crypto tips</li>
         </ol>
       </div>
       <div>
