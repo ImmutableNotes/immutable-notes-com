@@ -1,7 +1,7 @@
 import { connect } from '../utils/wep-state';
 import PageContainer from '../components/PageContainer';
 
-const contractAddress = 'vite_0d2ace1459d19d7960cb5daedb1202677013a1c715b809ebd5';
+const contractAddress = 'vite_99be0b35adc94fe8e334dd8a36786d18aef466e877112f704c';
 
 const Home = () => {
   return (
