@@ -14,6 +14,7 @@
 
 body {
   @apply bg-gray-100 text-gray-900;
+  /* @apply text-gray-900; */
 }
 
 .b {
@@ -35,10 +36,25 @@ button[disabled] {
 }
 
 .xy {
-  @apply flex justify-center items-center;
+  @apply flex flex-col justify-center items-center;
 }
 
-a.rect,
-button.rect {
-  @apply font-semibold rounded-lg px-4 py-2 text-xl;
+ul {
+  @apply space-y-2;
+}
+
+li {
+  @apply ml-8 pl-1;
+}
+
+.page-row {
+  @apply max-w-5xl mx-auto px-8;
+}
+
+.cell {
+  @apply p-8 bg-white rounded-2xl shadow-md;
+}
+
+.cell > p:first-child {
+  @apply text-4xl font-bold mb-2;
 }

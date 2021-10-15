@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Route, Redirect, Switch, RouteComponentProps } from 'react-router-dom';
-// import Hash from '../pages/Hash';
 import Home from '../pages/Home';
 
 type Props = RouteComponentProps;
@@ -23,7 +22,6 @@ const Router = () => {
       <>
         <Route path="/" component={ScrollToTop} />
         <Switch>
-          {/* <Route exact path="/hash/:hash" component={Hash} /> */}
           <Route exact path="/" component={Home} />
           <Route path="/*" render={() => <Redirect to="/" />} />
         </Switch>
