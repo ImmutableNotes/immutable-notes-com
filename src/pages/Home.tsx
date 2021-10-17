@@ -13,8 +13,8 @@ const Home = () => {
     <div>
       <div className="bg-white">
         <div className="page-row xy h-[36rem]">
-          <p className="text-7xl text-center font-extrabold">Immutable Notes</p>
-          <p className="mt-2 text-4xl text-center text-gray-500">Timestamped text that can't be changed</p>
+          <p className="text-6xl md:text-7xl text-center font-extrabold">Immutable Notes</p>
+          <p className="mt-2 text-3xl md:text-4xl text-center text-gray-500">Timestamped text that can't be changed</p>
           <A
             href="https://app.immutablenotes.com/"
             className="mt-9 font-semibold rounded-xl px-5 py-3 text-2xl bg-blue-500 text-white shadow"
@@ -24,8 +24,8 @@ const Home = () => {
         </div>
       </div>
       <div className="page-row">
-        <div className="mt-8 mb-12 md:flex">
-          <div className="cell mb-12 md:mb-0 md:flex-1 md:mr-8">
+        <div className="my-4 md:my-8 md:flex">
+          <div className="cell mb-4 md:mb-0 md:flex-1 md:mr-8">
             <p>Uses</p>
             <ul className="text-3xl list-disc">
               <li>Proving originality</li>
@@ -51,7 +51,7 @@ const Home = () => {
           </p>
         </div>
         <p className="mt-8 text-center text-3xl text-gray-500">{totalNotes || '...'} notes total</p>
-        <div className="flex space-x-4 text-gray-500 justify-center mt-4">
+        <div className="flex mb-16 space-x-4 text-gray-500 justify-center mt-4">
           <A title="GitHub" href="https://github.com/ImmutableNotes">
             <svg
               className="fill-current"
