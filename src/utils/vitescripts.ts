@@ -1,6 +1,6 @@
 // fork of https://github.com/weserickson/solpp-dapp-workshop/blob/master/src/vitescripts.js
 
-import { WS_RPC } from '@vite/vitejs-ws';
+import provider from '@vite/vitejs-ws';
 import { ViteAPI, abi } from '@vite/vitejs';
 import { Buffer } from 'buffer/'; // note: the trailing slash is important!
 
@@ -16,16 +16,12 @@ export const CONTRACT = {
 
 // Setup ViteAPI client using websockets. We will use this to subscribe to events.
 // const providerURL = 'wss://buidl.vite.net/gvite/ws'; // testnet node
-// const providerURL = 'wss://node-tokyo.vite.net/ws';
-const providerURL = 'wss://node.vite.net/gvite/ws';
-// const providerTimeout = 60000;
-// const providerOptions = { retryTimes: 10, retryInterval: 5000 };
-// const WS_RPC = new provider(providerURL, providerTimeout, providerOptions);
-// const viteClient = new ViteAPI(WS_RPC, () => {
-//   //   console.log('client connected');
-// });
-const connection = new WS_RPC(providerURL);
-const provider = new ViteAPI(connection, () => {
+const providerURL = 'wss://node-tokyo.vite.net/ws';
+// const providerURL = 'wss://node.vite.net/gvite/ws';
+const providerTimeout = 60000;
+const providerOptions = { retryTimes: 10, retryInterval: 5000 };
+const WS_RPC = new provider(providerURL, providerTimeout, providerOptions);
+const viteClient = new ViteAPI(WS_RPC, () => {
   console.log('client connected');
 });
 
@@ -36,7 +32,7 @@ const provider = new ViteAPI(connection, () => {
 //     addressHeightRange: { [address]: { fromHeight: '0', toHeight: '0' } },
 //     topics: [[topichash]],
 //   };
-//   const subscription = await provider.subscribe('createVmlogSubscription', filterParameters);
+//   const subscription = await viteClient.subscribe('createVmlogSubscription', filterParameters);
 //   subscription.callback = (res: any) => {
 //     console.log('EVENT:', res);
 //     const data = Buffer.from(res[0]['vmlog']['data'], 'base64').toString('hex');
@@ -51,7 +47,7 @@ const provider = new ViteAPI(connection, () => {
 async function subscribeToEvent(eventName, callback){
     const address = CONTRACT.address;
     const filterParameters = {"addressHeightRange":{[address]:{"fromHeight":"0","toHeight":"0"}}}; 
-    provider.subscribe("createVmlogSubscription", filterParameters).then( (event) => {
+    viteClient.subscribe("createVmlogSubscription", filterParameters).then( (event) => {
         event.on( (res) => {
             console.log("EVENT:",res);
             if (!Array.isArray(res)) return;
@@ -75,7 +71,7 @@ export const callOffChain = (methodName: string, params?: any[]) => {
   const ebase64 = Buffer.from(ehex, 'hex').toString('base64');
   const code = Buffer.from(CONTRACT.offChain, 'hex').toString('base64');
 
-  return provider
+  return viteClient
     .request('contract_callOffChainMethod', {
       address: CONTRACT.address,
       code,
@@ -85,6 +81,5 @@ export const callOffChain = (methodName: string, params?: any[]) => {
       const hexbuf = Buffer.from(res, 'base64').toString('hex');
       const { outputs = [] } = CONTRACT.abi.find((x) => x.name === methodName) || {};
       return abi.decodeParameters(outputs, hexbuf);
-    })
-    .catch((e) => console.log(e));
+    });
 };
